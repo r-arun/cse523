@@ -1,5 +1,6 @@
 import itertools
 import random
+from copy import copy
 
 GMIN = 2**32
 GMAX = -GMIN
@@ -22,22 +23,13 @@ def perform_test(points):
 	"""Given a set of points, generates all permutations and places the points 
 	according to the permutation and calculates the values of cg"""
 	#run tests on the permutation of points and print the result out
+	assert(len(points))
+	print points, sum(points)*1.0/len(points)
 	perm = itertools.permutations(points)
 	for arr in perm:
-		_min, _max = 1024, -1024
-		_cg = 0.0
-		total = 0.0
-		_cg_sum = 0.0
-		for ind  in xrange(len(arr)):
-			point = arr[ind]
-			total += point
-			_cg = total/(ind+1)
-			if(_cg > _max): _max = _cg
-			if(_cg < _min): _min = _cg
-			_cg_sum += _cg
-		print arr, _cg, _max, _min, _max - _min, _cg_sum
+		print arr,stat(arr,1)
 
-def stat(perm,verbose = 0):
+def stat(perm,detailed = 0):
 	"""Given a permutation, find the range and total movement of cg"""
 	cmin, cmax = GMIN, GMAX
 	movement = 0.0
@@ -46,22 +38,20 @@ def stat(perm,verbose = 0):
 	for ind in xrange(len(perm)):
 		total = total + perm[ind]
 		cg = total/(ind+1)
-		if(verbose):
-			print "CG",cg
 		if(cmin > cg): cmin = cg
 		if(cmax < cg): cmax = cg
 		if(ind > 0):
 			#first cg does not imply movement
 			movement += abs(cg - old_cg)
 		old_cg = cg
-	if(verbose):
-		print "CMAX",cmax
-		print "cmin",cmin
+	if(detailed):
+		return (cmax, cmin, abs(cmax-cmin), movement)
 	return (abs(cmax-cmin),movement)
 
 
 def heuristic1(points):
 	"""Place the next point such that the new ci moves close to cn"""
+	points = copy(points)
 	assert(len(points))
 	cn = sum(points)*1.0/len(points)
 	print "CN",cn
@@ -120,3 +110,5 @@ if(__name__=='__main__'):
 	print "HEURISTIC"
 	print heuristic1(test_case)
 print stat([1,3,0,-1,8],0)
+print test_case
+perform_test(test_case)
