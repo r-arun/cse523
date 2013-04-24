@@ -1,0 +1,7 @@
+This is a search problem. Searching for the optimal ordering of points.
+
+Next "Best" point function = next_function.txt
+C_l, C_r boundary approach = ci_closest_to_cn.txt
+Enumerate the search space for
+	1 point at a time problem.
+	2 points at a time.

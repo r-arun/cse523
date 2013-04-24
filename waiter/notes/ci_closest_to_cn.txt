@@ -1,0 +1,17 @@
+C_l, C_r boundary approach
+--------------------------
+	Try to keep the points within C_l and C_r, as much as possible.
+	Many class of heuristics will try to follow this.
+	Heuristic 1- Pick point such that C_i is closest to C_n 
+		This decides based only on C_i and not C_l or C_r.
+		In H1 the interval (C_l,C_r) will contain no unpicked point (provided a point can have at most 1 glass).
+		Proof by contradiction:
+			Assume an unpicked point x, lies between (C_l and C_r).
+			Without loss of generality, assume x is to the left of C_n and  C_l is past x.
+			Let y be the point that was placed that caused C_i to move to C_l. Clearly y is to left of x.
+			Had x been picked, C_i would have remained close to C_n than C_l and hence algorithm would have picked x over y.
+			So no such point x can remain unpicked and our assumption is incorrect.
+
+	Define C_l and C_r window.
+
+

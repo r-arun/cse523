@@ -1,0 +1,11 @@
+Find the next "best" point for every point.
+-------------------------------------------
+	Consider the relation p, B(p).
+	Search for the first point to put in the permutation.
+	You can not say that a point must preceed or succeed another without considering, sufficient state.
+	Required state - All the points before it, current cg. Since all the points are included in the cg and must be excluded from selection of B(p).
+	The new state arrived at Si, with cg - ci depends not only the point Pi chosen, but also on all points before it.
+	There is no Markovian property here.
+	Look at solutions to selection of a specific permutation with respect to an objective function.
+		Here it is minimizing the interval of c_i.
+		Or the distance moved between c_i-1 and c_i.
