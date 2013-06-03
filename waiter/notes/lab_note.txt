@@ -1,0 +1,22 @@
+1. Sorting effect
+-----------------
+In all heuristics on simultaneous picks, we sort points.
+	Thus the cg calculation seen for 1 point pick up, will pack points in ascending order among every 2 points. Though this provides a pattern it does not affect cmax, cmin or cdist since the points are in both sides of cn. It does not affect the goodness. If points were sorted based on distance from cn, we would have obtained nicer values in stat for H2, H3, etc.
+
+2. The Curious Case of H2 vs H3 in single vs 2 picks
+------------------------------------------------
+In case 3 of comparison, H2 (pick CG of two points closest to CN) beats H3 (pick two points such that Ci is closest to CN), some times in stat (one point at time). But fails to beat in stat2 (this condition is seen many times).
+When does this happen?
+	-C\prime range(H2) > C\prime range(H3)
+	-C range(H2) < C range(H3)
+	An example of this is consider 
+	P1, P2, P3, P4, P5, P6 as points picked by H2 in order
+	Q1, Q2, Q3, Q4, Q5, Q6 as points picked by H3 in order
+	Let P1, P3 be sharp falls/rises that contribute to cmin and cmax
+	Let Q2, Q4 be not so sharp falls/rises that contribute to cmin and cmax.
+	In this case P1, P3 overpower Q2, Q4 and help H2 better H3.
+	But if P2,  P4, P6 were moderate compared to Q2 and Q4, H3 will better H2.
+
+3. Single Pick in H4 beats 2 picks H4
+-------------------------------------
+H4 (pick ci closest to cn, but first search within delta limit) though it picks 2 points at a time, these two points are within a delta range, so as to make stat results look good. As a result stat result looks good, but stat2 result suffers compared to stat1 result.
